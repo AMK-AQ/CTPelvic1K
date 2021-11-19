@@ -92,7 +92,7 @@ if __name__ == "__main__":
     tta = args.tta # default = 0
     overwrite = args.overwrite_existing
 
-    output_folder_name = join(network_training_output_dir, # result_path/nnUNet_without_mirror
+    output_folder_name = os.path.join(network_training_output_dir, # result_path/nnUNet_without_mirror
                               args.model,  # 3d_lowres
                               args.task_name, # Task12_
                               args.nnunet_trainer + "__" + args.plans_identifier)

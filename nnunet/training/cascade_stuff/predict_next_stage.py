@@ -2,7 +2,7 @@ import numpy as np
 from batchgenerators.utilities.file_and_folder_operations import *
 import argparse
 from nnunet.preprocessing.preprocessing import resample_data_or_seg
-from batchgenerators.utilities.file_and_folder_operations import maybe_mkdir_p
+
 import nnunet
 from nnunet.run.default_configuration import get_default_configuration
 from multiprocessing import Pool
@@ -19,7 +19,7 @@ def resample_and_save(predicted, target_shape, output_file):
 
 def predict_next_stage(trainer, stage_to_be_predicted_folder, fold):
     output_folder = join(pardir(trainer.output_folder), f"pred_next_stage_{fold}")
-    maybe_mkdir_p(output_folder)
+    os.makedirs(output_folder, exist_ok=True)
 
     process_manager = Pool(2)
     results = []
@@ -76,7 +76,7 @@ def predict_next_stage(trainer, stage_to_be_predicted_folder, fold):
                                                                      1, False, 1,
                                                                      trainer.data_aug_params['mirror_axes'],
                                                                      True, True, 2, trainer.patch_size, True)
-        data_file_nofolder = data_file.split("/")[-1]
+        data_file_nofolder = os.path.basename(data_file)
         data_file_nextstage = join(stage_to_be_predicted_folder, data_file_nofolder)
         try:
             data_nextstage = np.load(data_file_nextstage)['data']
@@ -84,7 +84,7 @@ def predict_next_stage(trainer, stage_to_be_predicted_folder, fold):
             data_nextstage = np.load(data_file_nextstage.replace('.npz','.npy'))
 
         target_shp = data_nextstage.shape[1:]
-        output_file = join(output_folder, data_file_nextstage.split("/")[-1][:-4] + "_segFromPrevStage.npz")
+        output_file = join(output_folder, os.path.basename(data_file_nextstage)[:-4] + "_segFromPrevStage.npz")
         results.append(process_manager.starmap_async(resample_and_save, [(predicted, target_shp, output_file)]))
 
     _ = [i.get() for i in results]
@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
     stage_to_be_predicted_folder = join(dataset_directory, trainer.plans['data_identifier'] + "_stage%d" % 1)
     output_folder = join(pardir(trainer.output_folder), "pred_next_stage")
-    maybe_mkdir_p(output_folder)
+    os.makedirs(output_folder, exist_ok=True)
 
     predict_next_stage(trainer, stage_to_be_predicted_folder)
 

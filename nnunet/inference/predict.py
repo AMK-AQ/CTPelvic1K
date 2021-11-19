@@ -7,10 +7,19 @@ from nnunet.experiment_planning.plan_and_preprocess_task import get_caseIDs_from
 from nnunet.inference.segmentation_export import save_segmentation_nifti_from_softmax
 from batchgenerators.utilities.file_and_folder_operations import *
 from multiprocessing import Process, Queue
+
 import torch
 import SimpleITK as sitk
 import shutil
 from multiprocessing import Pool
+import sys 
+import pathos
+
+if 'win' in sys.platform: 
+    Process = pathos.helpers.mp.Process
+    Queue = pathos.helpers.mp.Queue
+    
+
 
 from nnunet.training.model_restore import load_model_and_checkpoint_files
 from nnunet.training.network_training.nnUNetTrainer import nnUNetTrainer
@@ -122,7 +131,7 @@ def predict_cases(model, list_of_lists, output_filenames, folds, save_npz,
     for o in output_filenames:
         dr, f = os.path.split(o)
         if len(dr) > 0:
-            maybe_mkdir_p(dr)
+            os.makedirs(dr, exist_ok=True)
         ### if the file format is not niigz, change to it.
         if not f.endswith(".nii.gz"):
             f, _ = os.path.splitext(f)
@@ -230,7 +239,7 @@ def predict_from_folder(model, input_folder, output_folder, folds, save_npz, num
     :return:
     """
     # preparation
-    maybe_mkdir_p(output_folder)
+    os.makedirs(output_folder, exist_ok=True)
     shutil.copy(join(model, 'plans.pkl'), output_folder)
 
     ### case name ###

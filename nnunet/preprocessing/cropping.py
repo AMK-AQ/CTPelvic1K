@@ -37,12 +37,12 @@ def crop_to_bbox(image, bbox):
 
 
 def get_case_identifier(case):
-    case_identifier = case[0].split("/")[-1].split(".nii.gz")[0][:-5]
+    case_identifier = os.path.basename(case[0]).split(".nii.gz")[0][:-5]
     return case_identifier
 
 
 def get_case_identifier_from_npz(case):
-    case_identifier = case.split("/")[-1][:-4]
+    case_identifier = os.path.basename(case)[:-4]
     return case_identifier
 
 
@@ -105,7 +105,7 @@ def crop_to_nonzero(data, seg=None, nonzero_label=-1):
 
 
 def get_patient_identifiers_from_cropped_files(folder):
-    return [i.split("/")[-1][:-4] for i in subfiles(folder, join=True, suffix=".npz")] ### ...... feizhejingansha....
+    return [os.path.basename(i)[:-4] for i in subfiles(folder, join=True, suffix=".npz")] ### ...... feizhejingansha....
 
 
 class ImageCropper(object):
@@ -121,7 +121,7 @@ class ImageCropper(object):
         self.num_threads = num_threads
 
         if self.output_folder is not None:
-            maybe_mkdir_p(self.output_folder)
+            os.makedirs(self.output_folder, exist_ok=True)
 
     @staticmethod
     def crop(data, properties, seg=None):
@@ -178,7 +178,7 @@ class ImageCropper(object):
             self.output_folder = output_folder
 
         output_folder_gt = os.path.join(self.output_folder, "gt_segmentations")
-        maybe_mkdir_p(output_folder_gt)
+        os.makedirs(output_folder_gt, exist_ok=True)
         for j, case in enumerate(list_of_files):
             if case[-1] is not None:
                 shutil.copy(case[-1], output_folder_gt)

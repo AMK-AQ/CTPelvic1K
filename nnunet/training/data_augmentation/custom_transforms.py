@@ -1,5 +1,5 @@
 import numpy as np
-from batchgenerators.transforms import AbstractTransform
+from batchgenerators.transforms.abstract_transforms import AbstractTransform
 
 
 class RemoveKeyTransform(AbstractTransform):

@@ -27,7 +27,7 @@ def split_4d(task_string):
     files = []
     output_dirs = []
 
-    maybe_mkdir_p(output_folder)
+    os.makedirs(output_folder, exist_ok=True)
     for subdir in ["imagesTr", "imagesTs"]:
         curr_out_dir = join(output_folder, subdir)
         if not isdir(curr_out_dir):
@@ -86,12 +86,12 @@ def get_caseIDs_from_splitted_dataset_folder(folder):
 
 
 def crop(task_string, override=False, num_threads=8):
-    cropped_out_dir = join(cropped_output_dir, task_string)
-    maybe_mkdir_p(cropped_out_dir)
+    cropped_out_dir = os.path.join(cropped_output_dir, task_string)
+    os.makedirs(cropped_out_dir, exist_ok=True)
 
     if override and isdir(cropped_out_dir):
         shutil.rmtree(cropped_out_dir)
-        maybe_mkdir_p(cropped_out_dir)
+        os.makedirs(cropped_out_dir, exist_ok=True)
 
     splitted_4d_output_dir_task = join(splitted_4d_output_dir, task_string)
     lists, _ = create_lists_from_splitted_dataset(splitted_4d_output_dir_task)
@@ -115,7 +115,7 @@ def plan_and_preprocess(task_string, processes_lowres=8, processes_fullres=3, no
     print(task_string)
     preprocessing_output_dir_this_task_train = join(preprocessing_output_dir, task_string)
     cropped_out_dir = join(cropped_output_dir, task_string)
-    maybe_mkdir_p(preprocessing_output_dir_this_task_train)
+    os.makedirs(preprocessing_output_dir_this_task_train, exist_ok=True)
 
     shutil.copy(join(cropped_out_dir, "dataset_properties.pkl"), preprocessing_output_dir_this_task_train)
     shutil.copy(join(splitted_4d_output_dir, task_string, "dataset.json"), preprocessing_output_dir_this_task_train)

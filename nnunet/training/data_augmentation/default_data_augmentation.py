@@ -1,10 +1,11 @@
 from copy import deepcopy
 import numpy as np
-from batchgenerators.dataloading import MultiThreadedAugmenter
-from batchgenerators.transforms import Compose, RenameTransform, GammaTransform, SpatialTransform
-from batchgenerators.transforms import DataChannelSelectionTransform, SegChannelSelectionTransform
-from batchgenerators.transforms import MirrorTransform, NumpyToTensor
-from batchgenerators.transforms.utility_transforms import RemoveLabelTransform
+from batchgenerators.dataloading.multi_threaded_augmenter import MultiThreadedAugmenter
+from batchgenerators.transforms.abstract_transforms import Compose
+from batchgenerators.transforms.color_transforms import GammaTransform
+from batchgenerators.transforms.spatial_transforms import SpatialTransform, MirrorTransform
+from batchgenerators.transforms.channel_selection_transforms import DataChannelSelectionTransform, SegChannelSelectionTransform 
+from batchgenerators.transforms.utility_transforms import RemoveLabelTransform, NumpyToTensor, RenameTransform
 from nnunet.training.data_augmentation.pyramid_augmentations import MoveSegAsOneHotToData, \
     RemoveRandomConnectedComponentFromOneHotEncodingTransform, ApplyRandomBinaryOperatorTransform, MoveLastFewDataToSeg_pbl
 from nnunet.training.data_augmentation.custom_transforms import Convert3DTo2DTransform, Convert2DTo3DTransform, \

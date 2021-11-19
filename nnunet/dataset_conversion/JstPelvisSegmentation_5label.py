@@ -6,6 +6,12 @@ import numpy as np
 from scipy.ndimage import label
 import shutil
 import argparse
+import os
+
+from pathlib import Path
+
+def maybe_mkdir_p(directory):
+    Path(directory).mkdir(parents=True, exist_ok=True)
 
 
 def export_segmentations(indir, outdir):
@@ -55,11 +61,13 @@ if __name__ == "__main__":
     """
     train_dir = opts.train_dir
     output_folder = opts.output_dir
-    test_dir = "/path/to/testing dataset"
+    train_dir = "C:/Users/Aamir/all_data/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
+    output_folder = "C:/Users/Aamir/all_data/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
+    test_dir = "C:/Users/Aamir/all_data/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
 
-    img_dir = join(output_folder, "imagesTr")
-    lab_dir = join(output_folder, "labelsTr")
-    img_dir_te = join(output_folder, "imagesTs")
+    img_dir = os.path.join(output_folder, "imagesTr")
+    lab_dir = os.path.join(output_folder, "labelsTr")
+    img_dir_te = os.path.join(output_folder, "imagesTs")
     maybe_mkdir_p(img_dir)
     maybe_mkdir_p(lab_dir)
     maybe_mkdir_p(img_dir_te)

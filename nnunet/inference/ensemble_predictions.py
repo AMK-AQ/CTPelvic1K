@@ -17,7 +17,7 @@ def merge_files(args):
 
 
 def merge(folders, output_folder, threads, override=True):
-    maybe_mkdir_p(output_folder)
+    os.makedirs(output_folder, exist_ok=True)
 
     patient_ids = [subfiles(i, suffix=".npz", join=False) for i in folders]
     patient_ids = [i for j in patient_ids for i in j]

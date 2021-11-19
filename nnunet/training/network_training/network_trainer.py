@@ -124,7 +124,7 @@ class NetworkTrainer(object):
             self.print_to_log_file("Creating new split...")
             splits = []
             all_keys_sorted = np.sort(list(self.dataset.keys()))
-            kfold = KFold(n_splits=5, shuffle=True, random_state=12345)
+            kfold = KFold(n_splits=2, shuffle=True, random_state=12345)
             for i, (train_idx, test_idx) in enumerate(kfold.split(all_keys_sorted)):
                 train_keys = np.array(all_keys_sorted)[train_idx]
                 test_keys = np.array(all_keys_sorted)[test_idx]
@@ -161,7 +161,7 @@ class NetworkTrainer(object):
             args = ("%s:" % dt_object, *args)
 
         if self.log_file is None:
-            maybe_mkdir_p(self.output_folder)
+            os.makedirs(self.output_folder, exist_ok=True)
             timestamp = datetime.now()
             self.log_file = join(self.output_folder, "training_log_%d_%d_%d_%02.0d_%02.0d_%02.0d.txt" %
                                          (timestamp.year, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute, timestamp.second))
@@ -298,7 +298,7 @@ class NetworkTrainer(object):
                  "But torch.backends.cudnn.benchmark is True as well and this will prevent deterministic training! "
                  "If you want deterministic then set benchmark=False")
 
-        maybe_mkdir_p(self.output_folder)
+        os.makedirs(self.output_folder, exist_ok=True)
 
         if not self.was_initialized:
             self.initialize(True)

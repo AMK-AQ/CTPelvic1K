@@ -85,8 +85,8 @@ def main_3d(base_path, check_save_path):
     base_path = base_path
     stage = 1
 
-    path = f'{base_path}/nnUNet_stage{stage}'
-    plans_path = f'{base_path}/nnUNetPlans_plans_3D.pkl'
+    path = f'{base_path}\nnUNet_processed\Task11_CTPelvic1K\nnUNet_stage{stage}'
+    plans_path = f'{base_path}\nnUNet_processed\Task11_CTPelvic1K\nnUNetPlans_plans_3D.pkl'
 
     names = os.listdir(path)
     names = [i[:-4] for i in names if i.endswith('.npy')]

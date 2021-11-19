@@ -253,7 +253,7 @@ class nnUNetTrainer(NetworkTrainer):
         :return:
         """
 
-        maybe_mkdir_p(self.output_folder)
+        os.makedirs(self.output_folder, exist_ok=True)
 
         if force_load_plans or (self.plans is None):
             self.load_plans_file()
@@ -623,7 +623,7 @@ class nnUNetTrainer(NetworkTrainer):
             self.do_split()
 
         output_folder = join(self.output_folder, validation_folder_name)  ### output_folder: fold_2/
-        maybe_mkdir_p(output_folder)
+        os.makedirs(output_folder, exist_ok=True)
 
         if do_mirroring:
             mirror_axes = self.data_aug_params['mirror_axes'] ### 默认是没有的，所以你开也白开。。。。。。。。。
@@ -640,7 +640,7 @@ class nnUNetTrainer(NetworkTrainer):
 
         for k in self.dataset_val.keys():
             properties = self.dataset[k]['properties']
-            fname = properties['list_of_data_files'][0].split("/")[-1][:-12]
+            fname = os.path.basename(properties['list_of_data_files'][0])[:-12]
             if override or (not isfile(join(output_folder, fname + ".nii.gz"))):
                 try:
                     data = np.load(self.dataset[k]['data_file'])['data']
@@ -704,7 +704,7 @@ class nnUNetTrainer(NetworkTrainer):
         _ = [i.get() for i in results]
         print("finished prediction, now evaluating...")
 
-        task = self.dataset_directory.split("/")[-1]
+        task = os.path.basename(self.dataset_directory)
         job_name = self.experiment_name
         _ = aggregate_scores(pred_gt_tuples, labels=list(range(self.num_classes)),
                              json_output_file=join(output_folder, "summary.json"),

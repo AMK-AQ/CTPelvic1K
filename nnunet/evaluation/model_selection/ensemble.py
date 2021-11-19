@@ -71,7 +71,7 @@ if __name__ == "__main__":
         assert all([isfile(join(validation_folder_net1, i)) for i in all_patient_identifiers])
         assert all([isfile(join(validation_folder_net2, i)) for i in all_patient_identifiers])
 
-        maybe_mkdir_p(output_folder)
+        os.makedirs(output_folder, exist_ok=True)
 
         for p in all_patient_identifiers:
             files1.append(join(validation_folder_net1, p))
@@ -94,8 +94,8 @@ if __name__ == "__main__":
         # now evaluate if all these gt files exist
         aggregate_scores(tuple(zip(out_files, gt_segmentations)), labels=plans['all_classes'],
                          json_output_file=join(output_folder, "summary_allFolds.json"), json_task=task,
-                         json_name=task + "__" + output_folder.split("/")[-1], num_threads=4)
+                         json_name=task + "__" + os.path.basename(output_folder_base), num_threads=4)
         json_out = load_json(join(output_folder, "summary_allFolds.json"))
-        json_out["experiment_name"] = output_folder.split("/")[-1]
+        json_out["experiment_name"] = os.path.basename(output_folder_base)
         save_json(json_out, join(output_folder, "summary_allFolds.json"))
-        shutil.copy(join(output_folder, "summary_allFolds.json"), join(out_dir_all_json, "%s__%s.json" % (task, output_folder.split("/")[-1])))
+        shutil.copy(join(output_folder, "summary_allFolds.json"), join(out_dir_all_json, "%s__%s.json" % (task, os.path.basename(output_folder_base))))
