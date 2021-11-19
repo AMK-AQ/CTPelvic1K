@@ -61,9 +61,9 @@ if __name__ == "__main__":
     """
     train_dir = opts.train_dir
     output_folder = opts.output_dir
-    train_dir = "C:/Users/Aamir/all_data/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
-    output_folder = "C:/Users/Aamir/all_data/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
-    test_dir = "C:/Users/Aamir/all_data/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
+    train_dir = "C:/Users/akh/all_data/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
+    output_folder = "C:/Users/akh/all_data/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
+    test_dir = "C:/Users/akh/all_data/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
 
     img_dir = os.path.join(output_folder, "imagesTr")
     lab_dir = os.path.join(output_folder, "labelsTr")

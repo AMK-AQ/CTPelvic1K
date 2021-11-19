@@ -10,7 +10,7 @@ home_dir = os.path.expanduser('~')
 train_dir = os.path.join(home_dir,'all_data\nnUNet\rawdata\Task11_CTPelvic1K')
 output_dir = os.path.join(home_dir, 'all_data\nnUNet\nnUNet_raw\Task11_CTPelvic1K')
 command = f'python dataset_conversion\JstPelvisSegmentation_5label.py --train_dir {train_dir} --output_dir {output_dir}'
-#command = 'python experiment_planning\plan_and_preprocess_task.py -t Task11_CTPelvic1K -pl 20 -pf 20'
+command = 'python experiment_planning\plan_and_preprocess_task.py -t Task11_CTPelvic1K -pl 20 -pf 20'
 
 processed_path = os.path.join(home_dir, 'all_data\nnUNet\nnUNet_processed\Task11_CTPelvic1K')
 check_save_path = os.path.join(home_dir, 'all_data\nnUNet\nnUNet_processed\Task11_CTPelvic1K\Task11_check')
