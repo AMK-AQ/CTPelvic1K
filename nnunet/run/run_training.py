@@ -10,7 +10,7 @@ from nnunet.training.cascade_stuff.predict_next_stage import predict_next_stage
 from nnunet.training.network_training.nnUNetTrainer import nnUNetTrainer
 from nnunet.training.network_training.nnUNetTrainerCascadeFullRes import nnUNetTrainerCascadeFullRes
 
-if __name__ == "__main__":
+def foo():
     parser = argparse.ArgumentParser()
     parser.add_argument("network")    ### '2d', '3d_lowres', '3d_fullres', '3d_cascade_fullres'
     parser.add_argument("network_trainer")    #### nnUNetTrainer
@@ -119,3 +119,8 @@ if __name__ == "__main__":
             predict_next_stage(trainer,
                                join(dataset_directory, trainer.plans['data_identifier'] + "_stage%d" % 1),
                                fold)
+
+if __name__ == "__main__":
+    from multiprocessing import freeze_support
+    freeze_support()
+    foo()
