@@ -10,6 +10,7 @@ import os
 
 from pathlib import Path
 
+
 def maybe_mkdir_p(directory):
     Path(directory).mkdir(parents=True, exist_ok=True)
 
@@ -45,6 +46,9 @@ def export_segmentations_postprocess(indir, outdir):
 
 
 if __name__ == "__main__":
+   # from multiprocessing import freeze_support
+   # freeze_support()
+    
     parser = argparse.ArgumentParser()
     parser.add_argument("--train_dir", type=str, default=None,
                         help="path to dataset CTPelvic1K")
@@ -61,9 +65,10 @@ if __name__ == "__main__":
     """
     train_dir = opts.train_dir
     output_folder = opts.output_dir
-    train_dir = "C:/Users/akh/all_data/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
-    output_folder = "C:/Users/akh/all_data/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
-    test_dir = "C:/Users/akh/all_data/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
+    train_dir = "C:/Users/akh/all_data_2/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
+    output_folder = "C:/Users/akh/all_data_2/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
+    test_dir = "C:/Users/akh/all_data_2/nnUNet/testing_data"
+    
 
     img_dir = os.path.join(output_folder, "imagesTr")
     lab_dir = os.path.join(output_folder, "labelsTr")
@@ -72,23 +77,22 @@ if __name__ == "__main__":
     maybe_mkdir_p(lab_dir)
     maybe_mkdir_p(img_dir_te)
 
-
     def load_save_train(args):
-        data_file, seg_file = args
-        pat_id = data_file.split("/")[-1]
-        pat_id = "train_" + pat_id.split("-")[-1][:-12]
+         data_file, seg_file = args
+         pat_id = data_file.split("/")[-1]
+         pat_id = "train_" + pat_id.split("-")[-1][:-12]
 
-        shutil.copy(data_file, join(img_dir, pat_id + ".nii.gz"))
+         shutil.copy(data_file, join(img_dir, pat_id + ".nii.gz"))
 
-        shutil.copy(seg_file, join(lab_dir, pat_id + ".nii.gz"))
-        return pat_id
+         shutil.copy(seg_file, join(lab_dir, pat_id + ".nii.gz"))
+         return pat_id
     def load_save_test(args):
-        data_file = args
-        pat_id = data_file.split("/")[-1]
-        pat_id = "test_" + pat_id.split("-")[-1][:-12]
+         data_file = args
+         pat_id = data_file.split("/")[-1]
+         pat_id = "test_" + pat_id.split("-")[-1][:-12]
 
-        shutil.copy(data_file, join(img_dir_te, pat_id + ".nii.gz"))
-        return pat_id
+         shutil.copy(data_file, join(img_dir_te, pat_id + ".nii.gz"))
+         return pat_id
 
 
     nii_files_tr_data = subfiles(train_dir, True, None, "_data.nii.gz", True)
@@ -97,10 +101,13 @@ if __name__ == "__main__":
     nii_files_ts      = subfiles(test_dir, True, None, "_data.nii.gz", True)
 
     p = Pool(16)
-    train_ids = p.map(load_save_train, zip(nii_files_tr_data, nii_files_tr_seg))
-    test_ids = p.map(load_save_test, nii_files_ts)
+    train_ids = p.map(dev_amk_1.load_save_train, zip(nii_files_tr_data, nii_files_tr_seg))
+    
+    test_ids = p.map(dev_amk_1.load_save_test, nii_files_ts)
+    
     p.close()
     p.join()
+
 
     json_dict = OrderedDict()
     json_dict['name'] = "CTPelvic1K_4label"
