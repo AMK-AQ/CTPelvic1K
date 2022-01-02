@@ -224,19 +224,22 @@ def computeQualityMeasures_oneModel(pred_path, target_path_file, subdataset, pos
 
 
 if __name__ == '__main__':
+    from multiprocessing import freeze_support
+    freeze_support()
     t_begin = time.time()
-    predbasePath = os.path.join(os.environ['HOME'],'all_data/nnUNet/rawdata/ipcai2021_ALL_Test/')
-    tarPath      = os.path.join(os.environ['HOME'],'all_data/nnUNet/rawdata/ipcai2021/')
+    home_dir = "C:\\Users\\akh"
+    predbasePath = os.path.join(home_dir,'all_data_2\\nnUNet\\rawdata\\ipcai2021_ALL_Test\\')
+    tarPath      = os.path.join(home_dir,'all_data_2\\nnUNet\\rawdata\\ipcai2021\\')
 
     print(predbasePath)
     for fo in [0]:
         computeQualityMeasures_oneModel(
             pred_path=predbasePath+
-                      f'Task22_ipcai2021_T__nnUNet_without_mirror_IPCAI2021_deeps_exclusion__nnUNet_without_mirror_IPCAI2021_deeps_exclusion__fold{fo}_3dcascadefullres_pred',
+                      f'Task22_ipcai2021__CTPelvic1K__fold{0}_2d_pred',
             target_path_file=tarPath,
             subdataset='all',
             postprocessor='sdf',
-            thread=64,
+            thread=32,
             region_th=2000,
             sdf_th=35)
 
