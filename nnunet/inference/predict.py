@@ -46,7 +46,7 @@ def predict_save_to_queue(preprocess_fn, q, list_of_lists, output_files, segs_fr
                                                                                  "shape! image: %s, seg_prev: %s" % \
                                                                                  (l[0], segs_from_prev_stage[i])
                 seg_prev = seg_prev.transpose(transpose_forward)
-                seg_reshaped = resize_segmentation(seg_prev, d.shape[1:], order=1, cval=0)
+                seg_reshaped = resize_segmentation(seg_prev, d.shape[1:], order=1)
                 seg_reshaped = to_one_hot(seg_reshaped, classes)
                 d = np.vstack((d, seg_reshaped)).astype(np.float32)
             """There is a problem with python process communication that prevents us from communicating obejcts 
@@ -257,7 +257,7 @@ def predict_from_folder(model, input_folder, output_folder, folds, save_npz, num
                       if i[:len(j)].startswith(j) and len(i) == (len(j) + 12)] for j in case_ids]
     print("list_of_lists: ", len(list_of_lists))
     print("for example: ", list_of_lists[0])
-    print("for example: ", output_files[0])
+    #print("for example: ", output_files[0])
     print("\n" + "-_-"*20 + '\n')
 
     if lowres_segmentations is not None:
