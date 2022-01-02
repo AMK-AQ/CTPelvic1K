@@ -85,25 +85,32 @@ def main_3d(base_path, check_save_path):
     base_path = base_path
     stage = 1
 
-    path = f'{base_path}\nnUNet_processed\Task11_CTPelvic1K\nnUNet_stage{stage}'
-    plans_path = f'{base_path}\nnUNet_processed\Task11_CTPelvic1K\nnUNetPlans_plans_3D.pkl'
+    path = f'{base_path}\\nnUNet\\nnUNet_processed\\Task11_CTPelvic1K\\nnUNet_stage{stage}'
+    plans_path = f'{base_path}\\nnUNet\\nnUNet_processed\\Task11_CTPelvic1K\\nnUNetPlans_plans_3D.pkl'
+    
 
     names = os.listdir(path)
-    names = [i[:-4] for i in names if i.endswith('.npy')]
+    
+
+    names = [i[:-4] for i in names if i.endswith('.npy')]           #here aamir changed npy to npz
+    
 
     print(len(names),'files to process...')
 
     with open(plans_path, "rb") as f:
         plans_info = pkl.load(f)
+        
 
     crop_size = plans_info["plans_per_stage"][stage]["patch_size"]  # array([ 96, 160, 128])
     crop_size[2] = 180 # enlarge
 
     assert stage==1
+    
+    print(check_save_path)
 
     img_save_path = check_save_path
     if not os.path.exists(img_save_path):
-        os.makedirs(img_save_path)
+        os.makedirs(img_save_path, exist_ok=True)
 
     pool = Pool()
     func = partial(_main_3d_one_case, path=path, crop_size=crop_size, stage=stage, img_save_path=img_save_path)
