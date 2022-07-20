@@ -6,7 +6,7 @@ Put your personal paths in here. This file will shortly be added to gitignore so
 import os
 #from os.path import join 
 
-Server_Base_Path = os.path.join(os.path.expanduser('~'),'all_data_2')
+Server_Base_Path = os.path.join(os.path.expanduser('~'),'Downloads','all_data_2')
 
 print(Server_Base_Path)
 
@@ -28,15 +28,18 @@ try:
     # automatically (they are subfolders of base).
     # Here I use environment variables to set the base folder. Environment variables allow me to use the same code on
     # different systems (and our compute cluster). You can replace this line with something like:
-    base = "C:\\Users\\akh\\all_data_2\\nnUNet"
+    #base = "C:\\Users\\akh\\all_data_2\\nnUNet"
     #base = os.environ['nnUNet_base']
-    #base = f'{Server_Base_Path}\\nnUNet'
+    base = f'{Server_Base_Path}\\nnUNet'
     raw_dataset_dir = os.path.join(base, "nnUNet_raw")
     splitted_4d_output_dir = os.path.join(base, "nnUNet_raw_splitted")
     cropped_output_dir = os.path.join(base, "nnUNet_raw_cropped")
+    raw_data_real = os.path.join(base,"rawdata","ipcai2021_ALL_Test")
+
     os.makedirs(splitted_4d_output_dir, exist_ok=True)
     os.makedirs(raw_dataset_dir, exist_ok=True)
     os.makedirs(cropped_output_dir, exist_ok=True)
+    os.makedirs(raw_data_real, exist_ok=True)
 except KeyError:
     print("nnUNet_raw_data_base is not defined and nnU-Net can only be used on data for which preprocessed files "
           "are already present on your system. nnU-Net cannot be used for experiment planning and preprocessing like "
