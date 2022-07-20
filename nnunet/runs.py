@@ -7,15 +7,15 @@ from nnunet.paths import my_output_identifier
 #                                              Experiment  preparing                                                   #
 ########################################################################################################################
 home_dir = os.path.expanduser('~')
-home_dir = "C:\\Users\\akh"
-train_dir = os.path.join(home_dir,'all_data_2','nnUNet','rawdata','Task11_CTPelvic1K')
+#home_dir = "C:\\Users\\akh"
+train_dir = os.path.join(home_dir,'Downloads','all_data_2','nnUNet','rawdata','Task11_CTPelvic1K')
 
-output_dir = os.path.join(home_dir, 'all_data_2','nnUNet','nnUNet_raw','Task11_CTPelvic1K')
+output_dir = os.path.join(home_dir,'Downloads', 'all_data_2','nnUNet','nnUNet_raw','Task11_CTPelvic1K')
 #command = f'python dataset_conversion\JstPelvisSegmentation_5label.py --train_dir {train_dir} --output_dir {output_dir}'
 #command = 'python experiment_planning\plan_and_preprocess_task.py -t Task11_CTPelvic1K -pl 8 -pf 8'
 
-processed_path = os.path.join(home_dir, 'all_data','nnUNet','nnUNet_processed','Task11_CTPelvic1K')
-check_save_path = os.path.join(home_dir, 'all_data','nnUNet','nnUNet_processed','Task11_CTPelvic1K','Task11_check')
+processed_path = os.path.join(home_dir, 'Downloads', 'all_data_2','nnUNet','nnUNet_processed','Task11_CTPelvic1K')
+check_save_path = os.path.join(home_dir, 'Downloads', 'all_data_2"','nnUNet','nnUNet_processed','Task11_CTPelvic1K','Task11_check')
 #command = f'python preprocessing\lumbosacral_joint_sampling.py --processed_path {processed_path} --check_save_path {check_save_path}'
 
 
@@ -48,7 +48,7 @@ GPU = 0
 """
     Testing on data never seen
 """
-test_data_path = os.path.join(home_dir, 'all_data_2','nnUNet','rawdata','ipcai2021_ALL_Test')
+test_data_path = os.path.join(home_dir,'Downloads', 'all_data_2','nnUNet','rawdata','ipcai2021_ALL_Test')
 
 command = f'python inference/predict_simple.py ' \
           f'-i {test_data_path} ' \
