@@ -57,8 +57,8 @@ command = f'python inference/predict_simple.py ' \
           f'-tr nnUNetTrainer ' \
           f'-m 2d ' \
           f'-f {FOLD} ' \
-          f'--num_threads_preprocessing 12 '\
-          f'--num_threads_nifti_save 6 '\
+          f'--num_threads_preprocessing 8 '\
+          f'--num_threads_nifti_save 4 '\
           f'--gpu {GPU}'
 #
 #command = f'python inference/predict_simple.py ' \
