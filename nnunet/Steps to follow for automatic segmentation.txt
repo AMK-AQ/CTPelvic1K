@@ -22,10 +22,9 @@ Step 9: On line 11, adapt the path as per your system.
 
 Step 10: On line 13, adapt the path as per your system.
 
-#Step 11: Uncomment the code from line 53 to 62
+Step 11: Uncomment the code from line 53 to 62
 
-Step 12: Place the nifti file in the C:\Users\akh\all_data_2\nnUNet\rawdata\nnUNet_raw_data\output\imagesTs folder created.
-	 C:\Users\akh\all_data_2\nnUNet\rawdata\ipcai2021_ALL_Test (either the above or this path is correct)
+Step 12: Place the nifti file in the C:\Users\akh\all_data_2\nnUNet\rawdata\ipcai2021_ALL_Test 
 	 Please adapt this path as per your system. Make sure to add a _0000.nii.gz as the suffix. This helps the network to
 	 identify the modality of the data, here CT.
 
