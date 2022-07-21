@@ -9,3 +9,6 @@ numpy
 sklearn
 SimpleITK
 pandas
+
+
+pip install -U git+https://github.com/AMK-AQ/batchgenerators.git
