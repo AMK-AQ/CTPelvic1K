@@ -4,11 +4,8 @@ dicom2nifti
 scikit-image>=0.14
 medpy
 scipy
-batchgenerators>=0.19.4
 numpy
 sklearn
 SimpleITK
 pandas
-
-
-pip install -U git+https://github.com/AMK-AQ/batchgenerators.git
+git+https://github.com/AMK-AQ/batchgenerators@master
