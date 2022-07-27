@@ -1,39 +1,22 @@
-Step 1: Clone / Download the CTPelvic1K repository from the github. This version is compatible with the Windows.  
+Step 1: Clone CTPelvic1K repository from the github. This version is compatible with the Windows.  
 
-Step 2: Unzip the downloaded folder
+Step 2: Open Anaconda command prompt. 
 
-Step 3: Open the nnunet folder.
+Step 3: Go to nnunet folder.
 
-Step 4: Open the paths.py file
+Step 4: Run the command: pip install -r requirements.txt
 
-Step 5: On line 9, change the path to the folder where the dataset is stored.
+Step 5: Run the command: pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
 
-Step 6: On line 31, adapt the folder path. The format would be something like ("C:\Users\akh\all_data_2\nnUNet")
+Step 6: Switch to "CTPelvic1K\nnunet"
 
-Step 6a: Open Anaconda command prompt. Run the command (pip install -r requirements.txt) 
+Step 7: Run the command: python paths.py
 
-Step 6b: Go to the folder path where paths.py is located. Run paths.py from the command prompt
+Step 8: Place the nifti file in the C:\Users\{user_name}\all_data_2\nnUNet\rawdata\ipcai2021_ALL_Test 
+	   Please adapt this path as per your system. Make sure to add a _0000.nii.gz as the suffix. This helps the network to identify the modality of the data, here CT.
 
-Step 7: Open the runs.py
+Step 9: Run the command: python runs.py. This will start running the inference.
 
-Step 8: On line 10, adapt the path to the home directory.
-
-Step 9: On line 11, adapt the path as per your system.
-
-Step 10: On line 13, adapt the path as per your system.
-
-Step 11: Uncomment the code from line 53 to 62
-
-Step 12: Place the nifti file in the C:\Users\akh\all_data_2\nnUNet\rawdata\ipcai2021_ALL_Test 
-	 Please adapt this path as per your system. Make sure to add a _0000.nii.gz as the suffix. This helps the network to
-	 identify the modality of the data, here CT.
-
-Step 13: Open the .pkl in the pretrained model folder. Unpickle the file and adapt the paths as per your system. Save the updated
-	 pickle file. Place the pickle file at C:\Users\akh\all_data_2\nnUNet\nnUNet_results_folder\CTPelvic1K\2d\Task22_ipcai2021\nnUNetTrainer__nnUNetPlans\fold_0
-
-Step 14: Now open the command prompt. Move to the folder nnunet. Type python paths.py. This will setup the folders. Now run runs.py.
-	 This will start running the inference. 
-
-Step 15: After the inference is complete, you can find the segmented data at C:\Users\akh\all_data_2\nnUNet\rawdata\ipcai2021_ALL_Test\Task22_ipcai2021__CTPelvic1K__fold0_2d_pred
+Step 10: After the inference is complete, you can find the segmented data at C:\Users\{user_name}\all_data_2\nnUNet\rawdata\ipcai2021_ALL_Test\Task22_ipcai2021__CTPelvic1K__fold0_2d_pred
 
  
