@@ -1,8 +1,8 @@
-Step 1: Clone CTPelvic1K repository from the github. This version is compatible with the Windows.  
+Step 1: Clone CTPelvic1K repository from the github (https://github.com/AMK-AQ/CTPelvic1K). This version is compatible with the Windows.  
 
 Step 2: Open Anaconda command prompt. 
 
-Step 3: Go to nnunet folder.
+Step 3: Go to CTPelvic1K folder.
 
 Step 4: Run the command: pip install -r requirements.txt
 
