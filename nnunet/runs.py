@@ -19,7 +19,6 @@ check_save_path = os.path.join(home_dir, 'Downloads', 'all_data_2"','nnUNet','nn
 #command = f'python preprocessing\lumbosacral_joint_sampling.py --processed_path {processed_path} --check_save_path {check_save_path}'
 
 
-
 ########################################################################################################################
 #                                              Experiment  running                                                     #
 ########################################################################################################################
