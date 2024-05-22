@@ -1,3 +1,29 @@
+# 2024-05-22 Steps to follow
+
+Step 1: Clone CTPelvic1K repository from the github (https://github.com/AMK-AQ/CTPelvic1K). This version is compatible with the Windows.  
+
+Step 2: Open Anaconda command prompt. 
+
+Step 3: Go to CTPelvic1K folder.
+
+Step 4: Run the command: pip install -r requirements.txt
+
+Step 5: Run the command: pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+
+Step 6: Switch to "CTPelvic1K\nnunet"
+
+Step 7: Run the command: python paths.py
+
+Step 8: Place the nifti file in the C:\Users\{user_name}\all_data_2\nnUNet\rawdata\ipcai2021_ALL_Test 
+	   Please adapt this path as per your system. Make sure to add a _0000.nii.gz as the suffix. This helps the network to identify the modality of the data, here CT.
+
+Step 9: Run the command: python runs.py. This will start running the inference.
+
+Step 10: After the inference is complete, you can find the segmented data at C:\Users\{user_name}\all_data_2\nnUNet\rawdata\ipcai2021_ALL_Test\Task22_ipcai2021__CTPelvic1K__fold0_2d_pred
+
+
+
+
 # 2021-02-08 update 
 In our recent follow-up work, we found that, during the database construction, some tiny outlier annotations were not well 
 removed, which mainly have an effect on the Hausdorff distance metric.
