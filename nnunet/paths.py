@@ -6,7 +6,7 @@ Put your personal paths in here. This file will shortly be added to gitignore so
 import os
 #from os.path import join 
 
-Server_Base_Path = os.path.join(os.path.expanduser('~'),'Downloads','all_data_2')
+Server_Base_Path = os.path.join(os.path.expanduser('~'),'3D_Slicer','CTPelvic1K', 'inference_weights')
 
 print(Server_Base_Path)
 
