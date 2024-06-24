@@ -65,9 +65,11 @@ if __name__ == "__main__":
     """
     train_dir = opts.train_dir
     output_folder = opts.output_dir
-    train_dir = "C:/Users/akh/all_data_2/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
-    output_folder = "C:/Users/akh/all_data_2/nnUNet/nnUNet_raw/Task11_CTPelvic1K"
-    test_dir = "C:/Users/akh/all_data_2/nnUNet/testing_data"
+    
+    home_dir = os.path.expanduser('~')
+    train_dir = os.path.join(home_dir,'3D_Slicer','CTPelvic1K', 'inference_weights','nnUNet', 'nnUNet_raw','Task11_CTPelvic1K')
+    output_folder = os.path.join(home_dir,'3D_Slicer','CTPelvic1K', 'inference_weights','nnUNet','nnUNet_raw','Task11_CTPelvic1K')
+    test_dir = os.path.join(home_dir,'3D_Slicer','CTPelvic1K', 'inference_weights','nnUNet','testing_data')
     
 
     img_dir = os.path.join(output_folder, "imagesTr")
