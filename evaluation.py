@@ -227,9 +227,14 @@ if __name__ == '__main__':
     from multiprocessing import freeze_support
     freeze_support()
     t_begin = time.time()
-    home_dir = "C:\\Users\\akh"
-    predbasePath = os.path.join(home_dir,'all_data_2\\nnUNet\\rawdata\\ipcai2021_ALL_Test\\')
-    tarPath      = os.path.join(home_dir,'all_data_2\\nnUNet\\rawdata\\ipcai2021\\')
+
+    home_dir = os.path.expanduser('~')
+    predbasePath = os.path.join(home_dir,'3D_Slicer','CTPelvic1K', 'inference_weights','nnUNet', 'rawdata','ipcai2021_ALL_Test')
+    tarPath = os.path.join(home_dir,'3D_Slicer','CTPelvic1K', 'inference_weights','nnUNet','rawdata','ipcai2021')
+    
+    # home_dir = "C:\\Users\\akh"
+    # predbasePath = os.path.join(home_dir,'all_data_2\\nnUNet\\rawdata\\ipcai2021_ALL_Test\\')
+    # tarPath      = os.path.join(home_dir,'all_data_2\\nnUNet\\rawdata\\ipcai2021\\')
 
     print(predbasePath)
     for fo in [0]:
