@@ -4,12 +4,9 @@ scikit-image==0.18.1
 medpy==0.4.0
 scipy==1.10.1
 numpy==1.22.1
-sklearn==0.0
+scikit-learn==1.0.2
 SimpleITK==2.3.1
 pandas==1.5.3
 pathos==0.2.8
 matplotlib==3.5.3
 git+https://github.com/AMK-AQ/batchgenerators@master
-torch @ https://download.pytorch.org/whl/cu118/torch-2.3.1%2Bcu118-cp310-cp310-linux_x86_64.whl
-torchvision @ https://download.pytorch.org/whl/cu118/torchvision-0.18.1%2Bcu118-cp310-cp310-linux_x86_64.whl
-torchaudio @ https://download.pytorch.org/whl/cu118/torchaudio-2.3.1%2Bcu118-cp310-cp310-linux_x86_64.whl
